@@ -5,7 +5,7 @@
 ## Login   <arthur@epitech.net>
 ##
 ## Started on  Tue Dec 20 10:21:11 2016 Arthur Philippe
-## Last update Tue Dec 27 14:50:59 2016 Arthur Philippe
+## Last update Thu Dec 29 15:38:34 2016 Arthur Philippe
 ##
 
 CC	=	gcc
@@ -24,11 +24,13 @@ SRCS	=	src/my_put_pixel.c	\
 		src/wf_errors.c		\
 		src/utilities_disp.c	\
 		src/wf_interact.c	\
+		src/wf_game_parser.c	\
+		src/wf_nuke.c		\
 		src/wf_core.c
 
 OBJS	=	$(SRCS:.c=.o)
 
-CFLAGS	=	-W -Wextra -Wall
+CFLAGS	=	-W -Wall -Wextra
 
 ##CFLAGS	+=	-Werror
 

@@ -5,35 +5,43 @@
 ** Login   <arthur@epitech.net>
 **
 ** Started on  Mon Dec 19 13:59:37 2016 Arthur Philippe
-** Last update Tue Dec 27 14:50:56 2016 Arthur Philippe
+** Last update Thu Dec 29 15:00:02 2016 Arthur Philippe
 */
 
 #include "wolf.h"
 
-int		wf_interact(t_env *env, sfEvent event)
+int		wf_interact(t_env *env)
 {
   sfVector2f	np;
 
   np = env->player.pos;
-  if (event.key.code == sfKeyE)
-    env->player.heading += 5;
-  else if (event.key.code == sfKeyA)
-    env->player.heading -= 5;
-  else if (event.key.code == sfKeyZ)
-    np = move_forward(np, env->player.heading, 0.1);
-  else if (event.key.code == sfKeyS)
-    np = move_forward(np, env->player.heading, -0.1);
-  else if (event.key.code == sfKeyQ)
-    np = move_forward(np, env->player.heading - 90, 0.1);
-  else if (event.key.code == sfKeyD)
-    np = move_forward(np, env->player.heading + 90, 0.1);
-  else
-    return (0);
-  printf("new heading is %f @ (%f %f)\n", env->player.heading, np.x, np.y);
-  if (!is_posf_a_wall(np, env->map))
+  if (KEY_PRSD(sfKeyZ) == sfTrue)
+    np = move_forward(np, env->player.heading, 0.05);
+  if (KEY_PRSD(sfKeyS) == sfTrue)
+    np = move_forward(np, env->player.heading, -0.05);
+  if (KEY_PRSD(sfKeyQ) == sfTrue)
+    np = move_forward(np, env->player.heading - 90, 0.05);
+  if (KEY_PRSD(sfKeyD) == sfTrue)
+    np = move_forward(np, env->player.heading + 90, 0.05);
+  if ((env->player.pos.x != np.x || env->player.pos.y != np.y)
+      && (!is_posf_a_wall(np, env->map)
+	  || is_posf_a_wall(np, env->map) == 3
+	  || is_posf_a_wall(np, env->map) == 4))
     {
       env->player.pos = np;
+      wf_turn(env);
       return (1);
     }
   return (0);
+}
+
+int	wf_turn(t_env *env)
+{
+  if (KEY_PRSD(sfKeyE) == sfTrue)
+    env->player.heading += 2.5;
+  else if (KEY_PRSD(sfKeyA) == sfTrue)
+    env->player.heading -= 2.5;
+  else
+    return (0);
+  return (1);
 }

@@ -5,52 +5,53 @@
 ** Login   <arthur@epitech.net>
 **
 ** Started on  Tue Dec 20 10:35:18 2016 Arthur Philippe
-** Last update Tue Dec 27 13:55:08 2016 Arthur Philippe
+** Last update Thu Dec 29 11:22:27 2016 Arthur Philippe
 */
 
 #include "wolf.h"
 
-void		wf_loop(t_my_window *w, t_env *env)
+int		wf_loop(t_my_window *w, t_env *env)
 {
   sfEvent	event;
-  int		status;
+  static int	status = 1;
 
-  status = 0;
+  if (wf_interact(env) || wf_turn(env) || status)
+    wf_refresh_window(w, env, &status);
   while (sfRenderWindow_pollEvent(w->window, &event))
     {
       if (event.type == sfEvtClosed)
 	sfRenderWindow_close(w->window);
-      if (event.type == sfEvtKeyPressed)
-	status = wf_interact(env, event);
     }
+  return (0);
+}
+
+void		wf_refresh_window(t_my_window *w, t_env *env, int *status)
+{
+  wf_reset_pixels(w->buffer);
+  wf_rendering_parser(w, env);
   sfRenderWindow_clear(w->window, sfCyan);
-  if (status)
-    {
-      wf_reset_pixels(w->buffer);
-      wf_rendering_parser(w, env);
-      status = 0;
-    }
   sfRenderWindow_drawSprite(w->window, w->sprite, NULL);
   sfTexture_updateFromPixels(w->tex, w->buffer->pixels, SC_W, SC_H, 0, 0);
   sfRenderWindow_display(w->window);
+  *status = 0;
 }
 
 void		wf_rendering_parser(t_my_window *w, t_env *env)
 {
   float		ray;
   float		step;
-  t_raycast	ray_c;
+  t_raycast	rayc;
   int		col;
 
   ray = env->player.heading - FOV / 2;
-  ray_c.dist = 0;
+  rayc.dist = 0;
   step = (float) FOV / w->buffer->width;
   col = 0;
   while (ray < env->player.heading + FOV / 2)
     {
-      ray_c = raycast_ultimate(env->player.pos, ray, env->map);
-      ray_c.dist = wf_convert_in_height(ray_c.dist, w, env->player.heading, ray);
-      wf_draw_col(col, w, ray_c.dist, ray_c.color);
+      rayc = raycast_ultimate(env->player.pos, ray, env->map);
+      rayc.dist = wf_convert_in_height(rayc.dist, w, env->player.heading, ray);
+      wf_draw_col(col, w, rayc.dist, rayc.color);
       ray += step;
       col += 1;
     }

@@ -5,7 +5,7 @@
 ** Login   <arthur@epitech.net>
 **
 ** Started on  Mon Dec 19 14:01:10 2016 Arthur Philippe
-** Last update Tue Dec 27 15:11:48 2016 Arthur Philippe
+** Last update Thu Dec 29 16:15:44 2016 Arthur Philippe
 */
 
 #include "wolf.h"
@@ -16,9 +16,10 @@ char	*file_to_buffer(char *file_name)
   int	size;
   char	*buffer;
 
-  buffer = malloc(sizeof(char *) * BUFFER_SIZE);
+  buffer = malloc(sizeof(char) * BUFFER_SIZE);
   if (!buffer)
     return ((char *) 0);
+  my_memset(buffer, BUFFER_SIZE);
   errno = 0;
   file_descriptor = open(file_name, O_RDONLY);
   if (file_descriptor == -1)
@@ -29,6 +30,15 @@ char	*file_to_buffer(char *file_name)
   buffer[BUFFER_SIZE - 1] = 0;
   close(file_descriptor);
   return (buffer);
+}
+
+void	display_file(char *file)
+{
+  char	*buffer;
+
+  buffer = file_to_buffer(file);
+  my_putstr(1, buffer);
+  free(buffer);
 }
 
 int	wf_map_size(char *buffer)
@@ -45,15 +55,18 @@ int	wf_map_size(char *buffer)
       if (buffer[i] == '\n')
 	{
 	  lines += 1;
+	  my_putstr(1, ".");
 	  cols = (!cols) ? i : cols;
 	}
-      else if (buffer[i] != '0' && buffer[i] != '1' && buffer[i] != 'w')
+      else if (buffer[i] != '0' && buffer[i] != '1'
+	       && buffer[i] != 'w' && buffer[i] != 't')
 	{
 	  wf_usage_error(1);
 	  return (0);
 	}
     }
-  if (lines + 1 != cols)
+  my_putstr(1, " ");
+  if (lines + 1 != cols && lines != cols)
     return (0);
   return (cols);
 }
@@ -68,13 +81,14 @@ char	**wf_set_map(char *buffer, int size)
   ix = 0;
   iy = 0;
   ib = -1;
-  if (!(map = malloc(sizeof(char *) * (size + 1))))
+  if (!(map = malloc(sizeof(char *) * (size + 5))))
     return (0);
   while (buffer[++ib] && buffer[ib] != -1)
     {
-      if (!(map[iy] = malloc(sizeof(char) * (size + 1))))
+      if (!(map[iy] = malloc(sizeof(char) * (size + 5))))
 	return (0);
-      while (buffer[ib] == '1' || buffer[ib] == '0' || buffer[ib] == 'w')
+      while (buffer[ib] == '1' || buffer[ib] == '0'
+	     || buffer[ib] == 'w' || buffer[ib] == 't')
 	map[iy][ix++] = buffer[ib++];
       map[iy][ix] = 0;
       iy += (buffer[ib] == '\n') ? 1 : 0;
@@ -90,16 +104,21 @@ int	wf_set_env(char *file, t_env *envir)
 {
   char	*buffer;
 
+  my_putstr(1, HINT_LOADING_MAP);
   buffer = file_to_buffer(file);
-  if (buffer)
+  if (buffer && envir
+      && (envir->map_size = wf_map_size(buffer))
+      && (envir->map = wf_set_map(buffer, envir->map_size)))
     {
-      if (!(envir->map_size = wf_map_size(buffer)))
-	return (-1);
-      if (!(envir->map = wf_set_map(buffer, envir->map_size)))
-	return (-1);
       envir->player.pos = DEFAULT_SPAWN;
       envir->player.heading = (float) 0;
       free(buffer);
     }
+  else
+    {
+      my_putstr(1, HINT_FAIL);
+      return (-1);
+    }
+  my_putstr(1, HINT_DONE);
   return (0);
 }

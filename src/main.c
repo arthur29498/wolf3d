@@ -5,56 +5,35 @@
 ** Login   <arthur@epitech.net>
 **
 ** Started on  Mon Dec 19 14:25:15 2016 Arthur Philippe
-** Last update Sat Dec 24 14:13:25 2016 Arthur Philippe
+** Last update Thu Dec 29 16:44:24 2016 Arthur Philippe
 */
 
 #include "wolf.h"
-/*
+
 int	main(int ac, char **av)
 {
-  char	*buffer;
-
-  if (ac != 2)
-    return (EXIT_ARG_COUNT);
-  buffer = file_to_buffer(av[1]);
-  if (buffer)
+  if (ac > 1)
     {
-      free(buffer);
-      return ((wf_start_window()) ? EXIT_FAILURE : EXIT_SUCCES);
+      if (av[1][0] == '-' && av[1][1] == 'h')
+	display_file(HELPER_FILE);
+      else
+	{
+	  if (!wolf_single_map(av[1]))
+	    {
+	      display_file(WINNING_FILE);
+	      my_putstr(1, HINT_WIN);
+	    }
+	  else
+	    my_putstr(1, HINT_EXITED);
+	}
+      return (EXIT_SUCCESS);
     }
-  return (EXIT_FAIL);
-}
-*/
-
-int	main(void)
-{
-  t_env	*env;
-
-  env = malloc(sizeof(t_env));
-  if (env)
+  if (!wolf_campaign_mode())
     {
-      if (wf_set_env(MAP_NAME, env) == -1)
-	return (84);
-      disp_map(env);
-      wf_start_window(env);
-      my_env_destroy(env);
+      display_file(WINNING_FILE);
+      my_putstr(1, HINT_WIN);
     }
   else
-    return (84);
-  return (0);
-}
-
-void	my_env_destroy(t_env *env)
-{
-  int	i;
-
-  i = 0;
-  while (env->map[i])
-    {
-      free(env->map[i]);
-      i += 1;
-    }
-  free(env->map[i]);
-  free(env->map);
-  free(env);
+    my_putstr(1, HINT_EXITED);
+  return (EXIT_SUCCESS);
 }

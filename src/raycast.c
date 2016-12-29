@@ -5,7 +5,7 @@
 ** Login   <arthur@epitech.net>
 **
 ** Started on  Tue Dec 20 13:12:08 2016 Arthur Philippe
-** Last update Tue Dec 27 15:28:54 2016 Arthur Philippe
+** Last update Thu Dec 29 17:23:56 2016 Arthur Philippe
 */
 
 #include "wolf.h"
@@ -26,8 +26,8 @@ float		raycast(sfVector2f pos,
 */
 
 t_raycast	raycast_ultimate(sfVector2f pos,
-		      float direction,
-		      char **map)
+				 float direction,
+				 char **map)
 {
   sfVector2f	tmp;
   sfVector2f	prev;
@@ -37,21 +37,22 @@ t_raycast	raycast_ultimate(sfVector2f pos,
   tmp = pos;
   out.dist = 0;
   delta_dist = 0;
-  while (!is_posf_a_wall(tmp, map))
+  while (!is_posf_a_wall(tmp, map) || is_posf_a_wall(tmp, map) == 4
+	 || is_posf_a_wall(tmp, map) == 3)
     {
       tmp = move_forward(pos, direction, out.dist);
-      out.dist += 0.01;
+      out.dist += 0.03;
     }
-  while (is_posf_a_wall(prev, map) && delta_dist < 0.1)
+  while (is_posf_a_wall(prev, map) == 1 && delta_dist < 0.1)
     {
       prev = move_forward(pos, direction, out.dist - delta_dist);
-      delta_dist += 0.0002;
+      delta_dist += 0.003;
     }
   out.dist = (out.dist - delta_dist) + 0.0002;
   if (is_posf_a_wall(tmp, map) == 1)
-    out.color = wf_wall_color(tmp, prev);
+    out.color = wf_wall_color(tmp, prev, map);
   else
-    out.color = sfGreen;
+    out.color = sfRed;
   return (out);
 }
 
@@ -68,15 +69,19 @@ int		is_posf_a_wall(sfVector2f posf, char **map)
     return (1);
   else if (map[y][x] == 'w')
     return (3);
+  else if (map[y][x] == 't')
+    return (4);
   return (0);
 }
 
-sfColor		wf_wall_color(sfVector2f wall, sfVector2f prev)
+sfColor		wf_wall_color(sfVector2f wall, sfVector2f prev, char **map)
 {
   sfVector2i	wall_t;
   sfVector2i	prev_t;
   sfVector2i	delta;
 
+  if (is_posf_a_wall(prev, map) == 3)
+    return (sfGreen);
   wall_t.x = (int) wall.x;
   wall_t.y = (int) wall.y;
   prev_t.x = (int) prev.x;

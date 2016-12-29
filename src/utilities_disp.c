@@ -5,7 +5,7 @@
 ** Login   <arthur@epitech.net>
 **
 ** Started on  Fri Dec 23 13:16:56 2016 Arthur Philippe
-** Last update Fri Dec 23 14:59:21 2016 Arthur Philippe
+** Last update Thu Dec 29 10:20:01 2016 Arthur Philippe
 */
 
 #include "wolf.h"
@@ -30,7 +30,7 @@ void	disp_map(t_env *env)
   int	y;
 
   y = 0;
-  while (env->map[y])
+  while (env->map[y] && y < env->map_size)
     {
       my_putstr(1, env->map[y]);
       my_putstr(1, "\n");
