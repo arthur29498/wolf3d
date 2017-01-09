@@ -5,7 +5,7 @@
 ** Login   <arthur@epitech.net>
 **
 ** Started on  Wed Dec 28 10:48:22 2016 Arthur Philippe
-** Last update Thu Dec 29 16:42:14 2016 Arthur Philippe
+** Last update Mon Jan  9 22:03:33 2017 Arthur Philippe
 */
 
 #include "wolf.h"
@@ -41,16 +41,19 @@ int		wolf_campaign_mode()
   t_my_window	*w;
   t_env		*env;
   char		*file;
+  int		out;
 
   w = malloc(sizeof(t_my_window));
   env = malloc(sizeof(t_env));
   file = wf_get_next_file_name();
+  out = 0;
   if (w && env && !wf_set_env(file, env) && !wf_start_window(w, env))
     {
       my_putstr(1, HINT_LAUNCHED_GAME);
       while (sfRenderWindow_isOpen(w->window) && env)
 	{
-	  wf_loop(w, env);
+	  if (wf_loop(w, env))
+	    out = 2;
 	  if (is_posf_a_wall(env->player.pos, env->map) == 4)
 	    return (wolf_terminate_game(env, w));
 	  if (is_posf_a_wall(env->player.pos, env->map) == 3)
@@ -60,7 +63,8 @@ int		wolf_campaign_mode()
   else
     return (1);
   wf_window_destroy(w);
-  return (0);
+  my_env_destroy(env);
+  return (out);
 }
 
 int		wolf_terminate_game(t_env *env, t_my_window *w)

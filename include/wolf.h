@@ -5,7 +5,7 @@
 ** Login   <arthur@epitech.net>
 **
 ** Started on  Mon Dec 19 14:17:18 2016 Arthur Philippe
-** Last update Thu Dec 29 16:40:17 2016 Arthur Philippe
+** Last update Mon Jan  9 22:11:34 2017 Arthur Philippe
 */
 
 #ifndef WOLF3D_H_
@@ -18,13 +18,14 @@
 # define BUFFER_SIZE	10000
 # define SC_W		1280
 # define SC_H		720
-# define WINDOW_NAME	"Debuging simulator, avoid conditional jumps!"
+# define WINDOW_NAME	"WOLF3D, Get out of the maze!"
 # define MAP_NAME	"map.w3"
 # define CAMPAIGN_CONF	"./game_data/campaign_data.w3"
 # define WINNING_FILE	"./game_data/winning.w3"
 # define N_STAGE_FILE	"./game_data/next_stage.w3"
 # define G_OVER_FILE	"./game_data/game_over.w3"
 # define HELPER_FILE	"./game_data/helper.w3"
+# define WELCOME_FILE	"./game_data/welcome.w3"
 
 # include <SFML/Graphics/RenderWindow.h>
 # include <SFML/Graphics/Sprite.h>
@@ -50,10 +51,10 @@
 # define HINT_LOADING_MAP	"Loading map..."
 # define HINT_OPENING_WINDOW	"Opening window... "
 # define HINT_DONE		"[SUCCESS]\n"
-# define HINT_LAUNCHED_GAME	"Game launched !\n"
+# define HINT_LAUNCHED_GAME	"\nGame core is ready!\n\n"
 # define HINT_FAIL		"[FAILURE]\n"
 # define HINT_NEXT_LEVEL	"Loading next level... "
-# define HINT_EXITED		"Player steped on a trap. Get rekt.\n"
+# define HINT_EXITED		"Game left.\n"
 # define HINT_WIN		"You won. GG!\n"
 
 # define FOV		70
@@ -62,6 +63,7 @@
 # define WALL_COLOR_S	((sfColor) {169, 169, 169, 255})
 # define WALL_COLOR_E	((sfColor) {128, 128, 128, 255})
 # define WALL_COLOR_W	((sfColor) {105, 105, 105, 255})
+# define WALL_COLOR_C	((sfColor) {47, 79, 79, 255})
 # define GROUND_COLOR	((sfColor) {47, 79, 79, 255})
 # define KEY_PRSD(X)	sfKeyboard_isKeyPressed(X)
 

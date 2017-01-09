@@ -5,7 +5,7 @@
 ** Login   <arthur@epitech.net>
 **
 ** Started on  Tue Dec 20 10:35:18 2016 Arthur Philippe
-** Last update Thu Dec 29 11:22:27 2016 Arthur Philippe
+** Last update Mon Jan  9 22:03:18 2017 Arthur Philippe
 */
 
 #include "wolf.h"
@@ -19,8 +19,12 @@ int		wf_loop(t_my_window *w, t_env *env)
     wf_refresh_window(w, env, &status);
   while (sfRenderWindow_pollEvent(w->window, &event))
     {
-      if (event.type == sfEvtClosed)
-	sfRenderWindow_close(w->window);
+      if (event.type == sfEvtClosed
+	  || (event.type == sfEvtKeyPressed && event.key.code == sfKeyEscape))
+	{
+	  sfRenderWindow_close(w->window);
+	  return (1);
+	}
     }
   return (0);
 }
