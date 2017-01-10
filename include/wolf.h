@@ -5,7 +5,7 @@
 ** Login   <arthur@epitech.net>
 **
 ** Started on  Mon Dec 19 14:17:18 2016 Arthur Philippe
-** Last update Mon Jan  9 22:11:34 2017 Arthur Philippe
+** Last update Tue Jan 10 10:04:10 2017 Arthur Philippe
 */
 
 #ifndef WOLF3D_H_
@@ -57,7 +57,7 @@
 # define HINT_EXITED		"Game left.\n"
 # define HINT_WIN		"You won. GG!\n"
 
-# define FOV		70
+# define FOV		60
 # define DEFAULT_SPAWN	((sfVector2f) {1.5, 1.5})
 # define WALL_COLOR_N	((sfColor) {192, 192, 192, 255})
 # define WALL_COLOR_S	((sfColor) {169, 169, 169, 255})

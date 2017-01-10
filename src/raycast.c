@@ -5,14 +5,10 @@
 ** Login   <arthur@epitech.net>
 **
 ** Started on  Tue Dec 20 13:12:08 2016 Arthur Philippe
-** Last update Mon Jan  9 20:57:27 2017 Arthur Philippe
+** Last update Tue Jan 10 17:12:23 2017 Arthur Philippe
 */
 
 #include "wolf.h"
-
-/*
-** at the beginning there was nothing
-*/
 
 float		raycast(sfVector2f pos,
 			float direction,
@@ -24,12 +20,21 @@ float		raycast(sfVector2f pos,
 
   tmp = pos;
   dist = 0;
-  while (tmp.x < mapSize.x && tmp.y < mapSize.y
-	 && map[(int) tmp.y][(int) tmp.x])
+  while (tmp.x >= 0 && tmp.y >= 0
+	 && tmp.x < mapSize.x && tmp.y < mapSize.y
+	 && !map[(int) tmp.y][(int) tmp.x])
     {
       tmp = move_forward(pos, direction, dist);
       dist += 0.02;
     }
+  while (tmp.x >= 0 && tmp.y >= 0
+	 && tmp.x < mapSize.x && tmp.y < mapSize.y
+	 && map[(int) tmp.y][(int) tmp.x])
+    {
+      tmp = move_forward(pos, direction, dist);
+      dist -= 0.001;
+    }
+  dist += 0.001;
   return (dist);
 }
 
@@ -51,16 +56,15 @@ t_raycast	raycast_ultimate(sfVector2f pos,
       tmp = move_forward(pos, direction, out.dist);
       out.dist += 0.02;
     }
+  prev = tmp;
   while (is_posf_a_wall(prev, map) == 1 && delta_dist < 0.1)
     {
       prev = move_forward(pos, direction, out.dist - delta_dist);
-      delta_dist += 0.001;
+      delta_dist += 0.003;
     }
-  out.dist = (out.dist - delta_dist) + 0.001;
+  out.dist = (out.dist - delta_dist) + 0.003;
   if (is_posf_a_wall(tmp, map) == 1)
     out.color = wf_wall_color(tmp, prev, map);
-  else
-    out.color = sfRed;
   return (out);
 }
 

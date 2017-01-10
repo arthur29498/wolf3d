@@ -5,7 +5,7 @@
 ## Login   <arthur@epitech.net>
 ##
 ## Started on  Tue Dec 20 10:21:11 2016 Arthur Philippe
-## Last update Thu Dec 29 15:38:34 2016 Arthur Philippe
+## Last update Tue Jan 10 16:58:14 2017 Arthur Philippe
 ##
 
 CC	=	gcc
@@ -41,7 +41,7 @@ LDFLAGS	=	-lm -lc_graph_prog
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(OBJS) -o $(NAME) $(CFLAGS) $(LDFLAGS)
+	$(CC) $(OBJS) -o $(NAME) $(LDFLAGS)
 
 clean:
 	$(RM) $(OBJS)
