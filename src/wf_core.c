@@ -5,10 +5,12 @@
 ** Login   <arthur@epitech.net>
 **
 ** Started on  Tue Dec 20 10:35:18 2016 Arthur Philippe
-** Last update Mon Jan  9 22:03:18 2017 Arthur Philippe
+** Last update Thu Jan 12 14:05:34 2017 Arthur Philippe
 */
 
 #include "wolf.h"
+#include "math.h"
+#include "wolf_walls.h"
 
 int		wf_loop(t_my_window *w, t_env *env)
 {

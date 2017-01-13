@@ -5,10 +5,11 @@
 ** Login   <arthur@epitech.net>
 **
 ** Started on  Tue Dec 20 13:12:08 2016 Arthur Philippe
-** Last update Tue Jan 10 17:12:23 2017 Arthur Philippe
+** Last update Thu Jan 12 14:05:24 2017 Arthur Philippe
 */
 
 #include "wolf.h"
+#include "wolf_walls.h"
 
 float		raycast(sfVector2f pos,
 			float direction,
@@ -25,16 +26,16 @@ float		raycast(sfVector2f pos,
 	 && !map[(int) tmp.y][(int) tmp.x])
     {
       tmp = move_forward(pos, direction, dist);
-      dist += 0.02;
+      dist += 0.04;
     }
   while (tmp.x >= 0 && tmp.y >= 0
 	 && tmp.x < mapSize.x && tmp.y < mapSize.y
 	 && map[(int) tmp.y][(int) tmp.x])
     {
       tmp = move_forward(pos, direction, dist);
-      dist -= 0.001;
+      dist -= 0.003;
     }
-  dist += 0.001;
+  dist += 0.003;
   return (dist);
 }
 
@@ -54,7 +55,7 @@ t_raycast	raycast_ultimate(sfVector2f pos,
 	 || is_posf_a_wall(tmp, map) == 3)
     {
       tmp = move_forward(pos, direction, out.dist);
-      out.dist += 0.02;
+      out.dist += 0.04;
     }
   prev = tmp;
   while (is_posf_a_wall(prev, map) == 1 && delta_dist < 0.1)

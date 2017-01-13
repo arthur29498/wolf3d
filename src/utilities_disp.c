@@ -5,10 +5,12 @@
 ** Login   <arthur@epitech.net>
 **
 ** Started on  Fri Dec 23 13:16:56 2016 Arthur Philippe
-** Last update Thu Dec 29 10:20:01 2016 Arthur Philippe
+** Last update Wed Jan 11 11:07:50 2017 Arthur Philippe
 */
 
 #include "wolf.h"
+#include <unistd.h>
+#include <stdlib.h>
 
 int	my_strlen(char *str)
 {
@@ -32,8 +34,8 @@ void	disp_map(t_env *env)
   y = 0;
   while (env->map[y] && y < env->map_size)
     {
-      my_putstr(1, env->map[y]);
-      my_putstr(1, "\n");
+      my_putstr(STDOUT_FILENO, env->map[y]);
+      my_putstr(STDOUT_FILENO, "\n");
       y += 1;
     }
 }

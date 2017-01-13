@@ -5,7 +5,7 @@
 ** Login   <arthur@epitech.net>
 **
 ** Started on  Mon Dec 19 14:17:18 2016 Arthur Philippe
-** Last update Tue Jan 10 10:04:10 2017 Arthur Philippe
+** Last update Thu Jan 12 14:02:32 2017 Arthur Philippe
 */
 
 #ifndef WOLF3D_H_
@@ -16,55 +16,17 @@
 # define EXIT_ARG_COUNT	84
 
 # define BUFFER_SIZE	10000
-# define SC_W		1280
-# define SC_H		720
+# define SC_W		1024
+# define SC_H		768
 # define WINDOW_NAME	"WOLF3D, Get out of the maze!"
 # define MAP_NAME	"map.w3"
-# define CAMPAIGN_CONF	"./game_data/campaign_data.w3"
-# define WINNING_FILE	"./game_data/winning.w3"
-# define N_STAGE_FILE	"./game_data/next_stage.w3"
-# define G_OVER_FILE	"./game_data/game_over.w3"
-# define HELPER_FILE	"./game_data/helper.w3"
-# define WELCOME_FILE	"./game_data/welcome.w3"
 
 # include <SFML/Graphics/RenderWindow.h>
 # include <SFML/Graphics/Sprite.h>
 # include <SFML/Graphics/Texture.h>
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
-# include <errno.h>
-# include <math.h>
-# include <stdio.h>
-
-# define MSG_INVALID_MAP	"Map is invalid "
-# define MSG_FD_ERROR		" File related error: "
-# define MSG_FC_ERROR		" File content error: "
-# define MSG_MISSING_FILE	"No such file or directory "
-# define MSG_PERMISSION		"Permission denied "
-# define MSG_IS_DIR		"Is a directory "
-# define MSG_UNKNOWN		"Unexpected file related error "
-
-# define HINT_LOADING_MAP	"Loading map..."
-# define HINT_OPENING_WINDOW	"Opening window... "
-# define HINT_DONE		"[SUCCESS]\n"
-# define HINT_LAUNCHED_GAME	"\nGame core is ready!\n\n"
-# define HINT_FAIL		"[FAILURE]\n"
-# define HINT_NEXT_LEVEL	"Loading next level... "
-# define HINT_EXITED		"Game left.\n"
-# define HINT_WIN		"You won. GG!\n"
-
 # define FOV		60
 # define DEFAULT_SPAWN	((sfVector2f) {1.5, 1.5})
-# define WALL_COLOR_N	((sfColor) {192, 192, 192, 255})
-# define WALL_COLOR_S	((sfColor) {169, 169, 169, 255})
-# define WALL_COLOR_E	((sfColor) {128, 128, 128, 255})
-# define WALL_COLOR_W	((sfColor) {105, 105, 105, 255})
-# define WALL_COLOR_C	((sfColor) {47, 79, 79, 255})
-# define GROUND_COLOR	((sfColor) {47, 79, 79, 255})
 # define KEY_PRSD(X)	sfKeyboard_isKeyPressed(X)
 
 /*
@@ -183,6 +145,6 @@ int	wolf_single_map(char *);
 int	wolf_campaign_mode(void);
 t_env	*wf_load_next_map(t_env *);
 char	*wf_get_next_file_name(void);
-int	wolf_terminate_game(t_env *, t_my_window *);
+int	wolf_terminate_game(t_env *, t_my_window *, int status);
 
 #endif /* !WOLF3D_H_ */

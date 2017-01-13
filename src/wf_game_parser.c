@@ -5,10 +5,14 @@
 ** Login   <arthur@epitech.net>
 **
 ** Started on  Wed Dec 28 10:48:22 2016 Arthur Philippe
-** Last update Mon Jan  9 22:03:33 2017 Arthur Philippe
+** Last update Thu Jan 12 13:59:29 2017 Arthur Philippe
 */
 
 #include "wolf.h"
+#include "wolf_files.h"
+#include "wolf_messages.h"
+#include <stdlib.h>
+#include <unistd.h>
 
 int		wolf_single_map(char *map_name)
 {
@@ -19,12 +23,12 @@ int		wolf_single_map(char *map_name)
   env = malloc(sizeof(t_env));
   if (w && env && !wf_set_env(map_name, env) && !wf_start_window(w, env))
     {
-      my_putstr(1, HINT_LAUNCHED_GAME);
+      my_putstr(STDOUT_FILENO, HINT_LAUNCHED_GAME);
       while (sfRenderWindow_isOpen(w->window))
 	{
 	  wf_loop(w, env);
 	  if (is_posf_a_wall(env->player.pos, env->map) == 4)
-	    return (wolf_terminate_game(env, w));
+	    return (wolf_terminate_game(env, w, 1));
 	  if (is_posf_a_wall(env->player.pos, env->map) == 3)
 	    sfRenderWindow_close(w->window);
 	}
@@ -49,30 +53,29 @@ int		wolf_campaign_mode()
   out = 0;
   if (w && env && !wf_set_env(file, env) && !wf_start_window(w, env))
     {
-      my_putstr(1, HINT_LAUNCHED_GAME);
+      my_putstr(STDOUT_FILENO, HINT_LAUNCHED_GAME);
       while (sfRenderWindow_isOpen(w->window) && env)
 	{
 	  if (wf_loop(w, env))
 	    out = 2;
 	  if (is_posf_a_wall(env->player.pos, env->map) == 4)
-	    return (wolf_terminate_game(env, w));
+	    return (wolf_terminate_game(env, w, 1));
 	  if (is_posf_a_wall(env->player.pos, env->map) == 3)
 	    env = wf_load_next_map(env);
 	}
     }
   else
     return (1);
-  wf_window_destroy(w);
-  my_env_destroy(env);
-  return (out);
+  return (wolf_terminate_game(env, w, out));
 }
 
-int		wolf_terminate_game(t_env *env, t_my_window *w)
+int		wolf_terminate_game(t_env *env, t_my_window *w, int status)
 {
   wf_window_destroy(w);
   my_env_destroy(env);
-  display_file(G_OVER_FILE);
-  return (1);
+  if (status == 1)
+    display_file(G_OVER_FILE);
+  return (status);
 }
 
 t_env		*wf_load_next_map(t_env *env)
@@ -84,9 +87,9 @@ t_env		*wf_load_next_map(t_env *env)
   if (file)
     {
       display_file(N_STAGE_FILE);
-      my_putstr(1, HINT_NEXT_LEVEL);
-      my_putstr(1, file);
-      my_putstr(1, "\n");
+      my_putstr(STDOUT_FILENO, HINT_NEXT_LEVEL);
+      my_putstr(STDOUT_FILENO, file);
+      my_putstr(STDOUT_FILENO, "\n");
       env = malloc(sizeof(t_env));
       if (env && !wf_set_env(file, env))
 	{

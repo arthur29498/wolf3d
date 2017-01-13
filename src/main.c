@@ -5,14 +5,16 @@
 ** Login   <arthur@epitech.net>
 **
 ** Started on  Mon Dec 19 14:25:15 2016 Arthur Philippe
-** Last update Mon Jan  9 22:11:43 2017 Arthur Philippe
+** Last update Wed Jan 11 11:12:30 2017 Arthur Philippe
 */
 
 #include "wolf.h"
+#include "wolf_files.h"
+#include "wolf_messages.h"
+#include <unistd.h>
 
 int	main(int ac, char **av)
 {
-  display_file(WELCOME_FILE);
   if (ac > 1)
     {
       if (av[1][0] == '-' && av[1][1] == 'h')
@@ -20,18 +22,18 @@ int	main(int ac, char **av)
       else
 	{
 	  if (!wolf_single_map(av[1]))
-	    my_putstr(1, HINT_WIN);
+	    my_putstr(STDOUT_FILENO, HINT_WIN);
 	  else
-	    my_putstr(1, HINT_EXITED);
+	    my_putstr(STDOUT_FILENO, HINT_EXITED);
 	}
       return (EXIT_SUCCESS);
     }
   if (!wolf_campaign_mode())
     {
       display_file(WINNING_FILE);
-      my_putstr(1, HINT_WIN);
+      my_putstr(STDOUT_FILENO, HINT_WIN);
     }
   else
-    my_putstr(1, HINT_EXITED);
+    my_putstr(STDOUT_FILENO, HINT_EXITED);
   return (EXIT_SUCCESS);
 }

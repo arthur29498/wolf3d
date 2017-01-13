@@ -5,10 +5,13 @@
 ** Login   <arthur@epitech.net>
 **
 ** Started on  Wed Dec 28 14:27:39 2016 Arthur Philippe
-** Last update Mon Jan  9 22:05:09 2017 Arthur Philippe
+** Last update Thu Jan 12 13:30:33 2017 Arthur Philippe
 */
 
 #include "wolf.h"
+#include "wolf_messages.h"
+#include <stdlib.h>
+#include <unistd.h>
 
 void	my_memset(char *str, int len)
 {
@@ -25,33 +28,33 @@ void	my_env_destroy(t_env *env)
 
   i = 0;
   if (!env)
-    return;
-  my_putstr(1, "Destroying environement");
+    return ;
+  my_putstr(STDOUT_FILENO, HINT_NUKE_ENV);
   while (i < env->map_size - 1 && env->map[i])
     {
-      my_putstr(1, ".");
+      my_putstr(STDOUT_FILENO, ".");
       free(env->map[i]);
       i += 1;
     }
-  my_putstr(1, " freed map content, ");
+  my_putstr(STDOUT_FILENO, HINT_NUKE_CONTENT);
   free(env->map);
-  my_putstr(1, "freed map pointers, ");
+  my_putstr(STDOUT_FILENO, HINT_NUKE_PTR);
   free(env);
-  my_putstr(1, "freed env [SUCCESS]\n");
+  my_putstr(STDOUT_FILENO, HINT_NUKE_ENV_ENDED);
 }
 
 void	wf_window_destroy(t_my_window *w)
 {
   if (!w)
-    return;
-  my_putstr(1, "Destroying window... ");
+    return ;
+  my_putstr(STDOUT_FILENO, HINT_NUKE_WDW);
   free(w->buffer->pixels);
-  my_putstr(1, "freed pixels, ");
+  my_putstr(STDOUT_FILENO, HINT_NUKE_PIXELS);
   free(w->buffer);
-  my_putstr(1, "freed framebuffer, ");
+  my_putstr(STDOUT_FILENO, HINT_NUKE_FRAMEBUFFER);
   sfTexture_destroy(w->tex);
   sfSprite_destroy(w->sprite);
-  my_putstr(1, "freed texture and sprite, ");
+  my_putstr(STDOUT_FILENO, HINT_NUKE_TEX);
   sfRenderWindow_destroy(w->window);
-  my_putstr(1, "destroyed window [SUCCESS]\n");
+  my_putstr(STDOUT_FILENO, HINT_NUKE_WDW_ENDED);
 }

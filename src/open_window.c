@@ -5,14 +5,17 @@
 ** Login   <arthur@epitech.net>
 **
 ** Started on  Mon Dec 19 13:35:43 2016 Arthur Philippe
-** Last update Thu Dec 29 10:51:21 2016 Arthur Philippe
+** Last update Wed Jan 11 11:13:07 2017 Arthur Philippe
 */
 
 #include "wolf.h"
+#include "wolf_messages.h"
+#include <stdlib.h>
+#include <unistd.h>
 
 int			wf_start_window(t_my_window *w, t_env *env)
 {
-  my_putstr(1, HINT_OPENING_WINDOW);
+  my_putstr(STDOUT_FILENO, HINT_OPENING_WINDOW);
   if (!w)
     return (1);
   w->window = create_window(WINDOW_NAME, SC_W, SC_H);
@@ -24,7 +27,7 @@ int			wf_start_window(t_my_window *w, t_env *env)
   sfSprite_setTexture(w->sprite, w->tex, sfTrue);
   wf_rendering_parser(w, env);
   sfTexture_updateFromPixels(w->tex, w->buffer->pixels, SC_W, SC_H, 0, 0);
-  my_putstr(1, HINT_DONE);
+  my_putstr(STDOUT_FILENO, HINT_DONE);
   return (0);
 }
 

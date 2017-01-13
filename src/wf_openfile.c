@@ -5,10 +5,17 @@
 ** Login   <arthur@epitech.net>
 **
 ** Started on  Mon Dec 19 14:01:10 2016 Arthur Philippe
-** Last update Thu Dec 29 16:15:44 2016 Arthur Philippe
+** Last update Wed Jan 11 11:07:27 2017 Arthur Philippe
 */
 
 #include "wolf.h"
+#include "wolf_messages.h"
+#include <stdlib.h>
+#include <errno.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
 char	*file_to_buffer(char *file_name)
 {
@@ -37,7 +44,7 @@ void	display_file(char *file)
   char	*buffer;
 
   buffer = file_to_buffer(file);
-  my_putstr(1, buffer);
+  my_putstr(STDOUT_FILENO, buffer);
   free(buffer);
 }
 
@@ -55,7 +62,7 @@ int	wf_map_size(char *buffer)
       if (buffer[i] == '\n')
 	{
 	  lines += 1;
-	  my_putstr(1, ".");
+	  my_putstr(STDOUT_FILENO, ".");
 	  cols = (!cols) ? i : cols;
 	}
       else if (buffer[i] != '0' && buffer[i] != '1'
@@ -65,10 +72,8 @@ int	wf_map_size(char *buffer)
 	  return (0);
 	}
     }
-  my_putstr(1, " ");
-  if (lines + 1 != cols && lines != cols)
-    return (0);
-  return (cols);
+  my_putstr(STDOUT_FILENO, " ");
+  return ((lines + 1 != cols && lines != cols) ? 0 : cols);
 }
 
 char	**wf_set_map(char *buffer, int size)
@@ -104,7 +109,7 @@ int	wf_set_env(char *file, t_env *envir)
 {
   char	*buffer;
 
-  my_putstr(1, HINT_LOADING_MAP);
+  my_putstr(STDOUT_FILENO, HINT_LOADING_MAP);
   buffer = file_to_buffer(file);
   if (buffer && envir
       && (envir->map_size = wf_map_size(buffer))
@@ -116,9 +121,9 @@ int	wf_set_env(char *file, t_env *envir)
     }
   else
     {
-      my_putstr(1, HINT_FAIL);
+      my_putstr(STDOUT_FILENO, HINT_FAIL);
       return (-1);
     }
-  my_putstr(1, HINT_DONE);
+  my_putstr(STDOUT_FILENO, HINT_DONE);
   return (0);
 }

@@ -5,14 +5,11 @@
 ** Login   <arthur@epitech.net>
 **
 ** Started on  Tue Dec 20 13:13:33 2016 Arthur Philippe
-** Last update Wed Jan  4 11:37:00 2017 Arthur Philippe
+** Last update Tue Jan 10 17:22:10 2017 Arthur Philippe
 */
 
 #include "wolf.h"
-
-/*
-** at the beginning there was nothing
-*/
+#include <math.h>
 
 sfVector2f	move_forward(sfVector2f pos, float direction, float distance)
 {
