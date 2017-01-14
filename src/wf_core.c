@@ -5,7 +5,7 @@
 ** Login   <arthur@epitech.net>
 **
 ** Started on  Tue Dec 20 10:35:18 2016 Arthur Philippe
-** Last update Thu Jan 12 14:05:34 2017 Arthur Philippe
+** Last update Sat Jan 14 08:47:43 2017 Arthur Philippe
 */
 
 #include "wolf.h"
@@ -17,8 +17,6 @@ int		wf_loop(t_my_window *w, t_env *env)
   sfEvent	event;
   static int	status = 1;
 
-  if (wf_interact(env) || wf_turn(env) || status)
-    wf_refresh_window(w, env, &status);
   while (sfRenderWindow_pollEvent(w->window, &event))
     {
       if (event.type == sfEvtClosed
@@ -28,6 +26,9 @@ int		wf_loop(t_my_window *w, t_env *env)
 	  return (1);
 	}
     }
+  if (wf_interact(env) || wf_turn(env) || status)
+    wf_refresh_window(w, env, &status);
+
   return (0);
 }
 
@@ -49,14 +50,14 @@ void		wf_rendering_parser(t_my_window *w, t_env *env)
   t_raycast	rayc;
   int		col;
 
-  ray = env->player.heading - FOV / 2;
+  ray = env->player.heading - env->fov / 2;
   rayc.dist = 0;
-  step = (float) FOV / w->buffer->width;
+  step = (float) env->fov / w->buffer->width;
   col = 0;
-  while (ray < env->player.heading + FOV / 2)
+  while (ray < env->player.heading + env->fov / 2)
     {
       rayc = raycast_ultimate(env->player.pos, ray, env->map);
-      rayc.dist = wf_convert_in_height(rayc.dist, w, env->player.heading, ray);
+      rayc.dist = wf_convert_in_height(rayc.dist, w, env, ray);
       wf_draw_col(col, w, rayc.dist, rayc.color);
       ray += step;
       col += 1;
@@ -84,12 +85,13 @@ void		wf_draw_col(int col,
 
 float		wf_convert_in_height(float dist,
 				     t_my_window *w,
-				     float heading,
+				     t_env *env,
 				     float ray)
 {
   float		height;
 
-  dist *= cosf(wf_degres_to_rads(heading) - wf_degres_to_rads(ray));
+  if (env->fov < 180)
+    dist *= cosf(degres_to_rads(env->player.heading) - degres_to_rads(ray));
   height = w->buffer->height / dist;
   height = (height > w->buffer->height) ? w->buffer->height : height;
   return (height);

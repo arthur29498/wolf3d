@@ -5,7 +5,7 @@
 ** Login   <arthur@epitech.net>
 **
 ** Started on  Mon Dec 19 14:17:18 2016 Arthur Philippe
-** Last update Thu Jan 12 14:02:32 2017 Arthur Philippe
+** Last update Sat Jan 14 08:48:09 2017 Arthur Philippe
 */
 
 #ifndef WOLF3D_H_
@@ -25,7 +25,7 @@
 # include <SFML/Graphics/Sprite.h>
 # include <SFML/Graphics/Texture.h>
 
-# define FOV		60
+# define FOV		360
 # define DEFAULT_SPAWN	((sfVector2f) {1.5, 1.5})
 # define KEY_PRSD(X)	sfKeyboard_isKeyPressed(X)
 
@@ -57,6 +57,8 @@ typedef struct		s_env
 {
   char			**map;
   int			map_size;
+  int			night;
+  int			fov;
   t_player		player;
 }			t_env;
 
@@ -84,7 +86,7 @@ void		my_draw_ordinate(t_my_framebuffer *,
 			         sfColor);
 sfVector2f	move_forward(sfVector2f pos, float direction, float distance);
 sfVector2f	move_forward_rev(sfVector2f, float, float);
-float		wf_degres_to_rads(float degres);
+float		degres_to_rads(float degres);
 t_raycast	raycast_ultimate(sfVector2f, float, char **);
 sfColor		wf_wall_color(sfVector2f, sfVector2f, char **);
 
@@ -107,9 +109,12 @@ char				*file_to_buffer(char *);
 int				wf_map_size(char *buffer);
 char				**wf_set_map(char *buffer, int size);
 int				wf_set_env(char *file, t_env *envir);
+void				wf_conf_file(t_env *);
 void				my_env_destroy(t_env *);
 void				display_file(char *);
 void				my_memset(char *, int);
+sfVector2f			wf_place_player(char **map);
+int				my_getnbr(char *);
 
 /*
 ** Error management
@@ -129,7 +134,7 @@ void				disp_map(t_env *);
 void	wf_rendering_parser(t_my_window *, t_env *);
 int	is_posf_a_wall(sfVector2f, char **);
 void	wf_draw_col(int, t_my_window *, float, sfColor);
-float	wf_convert_in_height(float, t_my_window *, float, float);
+float	wf_convert_in_height(float, t_my_window *, t_env *, float);
 void	wf_reset_pixels(t_my_framebuffer *);
 
 /*

@@ -5,7 +5,7 @@
 ## Login   <arthur@epitech.net>
 ##
 ## Started on  Tue Dec 20 10:21:11 2016 Arthur Philippe
-## Last update Thu Jan 12 14:37:27 2017 Arthur Philippe
+## Last update Fri Jan 13 13:57:28 2017 Arthur Philippe
 ##
 
 CC	=	gcc
@@ -21,8 +21,10 @@ SRCS	=	src/my_put_pixel.c	\
 		src/main.c		\
 		src/open_window.c	\
 		src/wf_openfile.c	\
+		src/wf_openfile_b.c	\
 		src/wf_errors.c		\
 		src/utilities_disp.c	\
+		src/utilities_nbr.c	\
 		src/wf_interact.c	\
 		src/wf_game_parser.c	\
 		src/wf_nuke.c		\

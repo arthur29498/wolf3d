@@ -5,7 +5,7 @@
 ** Login   <arthur@epitech.net>
 **
 ** Started on  Mon Dec 19 14:01:10 2016 Arthur Philippe
-** Last update Wed Jan 11 11:07:27 2017 Arthur Philippe
+** Last update Fri Jan 13 15:01:19 2017 Arthur Philippe
 */
 
 #include "wolf.h"
@@ -66,7 +66,7 @@ int	wf_map_size(char *buffer)
 	  cols = (!cols) ? i : cols;
 	}
       else if (buffer[i] != '0' && buffer[i] != '1'
-	       && buffer[i] != 'w' && buffer[i] != 't')
+	       && buffer[i] != 'w' && buffer[i] != 't' && buffer[i] != 'p')
 	{
 	  wf_usage_error(1);
 	  return (0);
@@ -93,7 +93,7 @@ char	**wf_set_map(char *buffer, int size)
       if (!(map[iy] = malloc(sizeof(char) * (size + 5))))
 	return (0);
       while (buffer[ib] == '1' || buffer[ib] == '0'
-	     || buffer[ib] == 'w' || buffer[ib] == 't')
+	     || buffer[ib] == 'w' || buffer[ib] == 't' || buffer[ib] == 'p')
 	map[iy][ix++] = buffer[ib++];
       map[iy][ix] = 0;
       iy += (buffer[ib] == '\n') ? 1 : 0;
@@ -101,7 +101,7 @@ char	**wf_set_map(char *buffer, int size)
     }
   if (!(map[iy + 1] = malloc(sizeof(char) * (size + 1))))
     return (0);
-  map[iy + 1] = 0;
+  map[iy] = 0;
   return (map);
 }
 
@@ -115,9 +115,11 @@ int	wf_set_env(char *file, t_env *envir)
       && (envir->map_size = wf_map_size(buffer))
       && (envir->map = wf_set_map(buffer, envir->map_size)))
     {
-      envir->player.pos = DEFAULT_SPAWN;
+      my_putstr(1, "finnishing up, ");
+      envir->player.pos = wf_place_player(envir->map);
       envir->player.heading = (float) 0;
       free(buffer);
+      wf_conf_file(envir);
     }
   else
     {

@@ -5,7 +5,7 @@
 ** Login   <arthur.philippe@epitech.eu>
 **
 ** Started on  Tue Jan 10 20:48:26 2017 Arthur Philippe
-** Last update Tue Jan 10 21:13:02 2017 Arthur Philippe
+** Last update Fri Jan 13 16:45:02 2017 Arthur Philippe
 */
 
 #ifndef WOLF_MESSAGES_H_

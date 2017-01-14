@@ -5,7 +5,7 @@
 ** Login   <arthur@epitech.net>
 **
 ** Started on  Mon Dec 19 13:59:37 2016 Arthur Philippe
-** Last update Thu Dec 29 15:00:02 2016 Arthur Philippe
+** Last update Fri Jan 13 16:40:24 2017 Arthur Philippe
 */
 
 #include "wolf.h"
@@ -41,6 +41,10 @@ int	wf_turn(t_env *env)
     env->player.heading += 2.5;
   else if (KEY_PRSD(sfKeyA) == sfTrue)
     env->player.heading -= 2.5;
+  else if (KEY_PRSD(sfKeyW) == sfTrue)
+    env->fov += (env->fov + 10 <= 1080) ? 10 : 0;
+  else if (KEY_PRSD(sfKeyX) == sfTrue)
+    env->fov -= (env->fov - 10 >= 40) ? 10 : 0;
   else
     return (0);
   return (1);

@@ -5,7 +5,7 @@
 ** Login   <arthur@epitech.net>
 **
 ** Started on  Tue Dec 20 13:13:33 2016 Arthur Philippe
-** Last update Tue Jan 10 17:22:10 2017 Arthur Philippe
+** Last update Sat Jan 14 08:47:33 2017 Arthur Philippe
 */
 
 #include "wolf.h"
@@ -16,13 +16,13 @@ sfVector2f	move_forward(sfVector2f pos, float direction, float distance)
   sfVector2f	w;
   float		angle;
 
-  angle = wf_degres_to_rads(direction);
+  angle = degres_to_rads(direction);
   w.x = pos.x + (distance * cos(angle));
   w.y = pos.y + (distance * sin(angle));
   return (w);
 }
 
-float		wf_degres_to_rads(float degres)
+float		degres_to_rads(float degres)
 {
   float		rads;
 
