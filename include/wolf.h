@@ -5,7 +5,7 @@
 ** Login   <arthur@epitech.net>
 **
 ** Started on  Mon Dec 19 14:17:18 2016 Arthur Philippe
-** Last update Sat Jan 14 15:51:21 2017 Arthur Philippe
+** Last update Sat Jan 14 21:56:11 2017 Arthur Philippe
 */
 
 #ifndef WOLF3D_H_
@@ -138,6 +138,7 @@ int	is_posf_a_wall(sfVector2f, char **);
 void	wf_draw_col(int, t_my_window *, t_raycast *, int);
 float	wf_convert_in_height(float, t_my_window *, t_env *, float);
 void	wf_reset_pixels(t_my_framebuffer *);
+void	wf_darken(t_raycast *);
 
 /*
 ** Interaction
