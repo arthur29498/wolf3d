@@ -5,7 +5,7 @@
 ## Login   <arthur@epitech.net>
 ##
 ## Started on  Tue Dec 20 10:21:11 2016 Arthur Philippe
-## Last update Fri Jan 13 13:57:28 2017 Arthur Philippe
+## Last update Sat Jan 14 09:10:24 2017 Arthur Philippe
 ##
 
 CC	=	gcc
@@ -28,7 +28,8 @@ SRCS	=	src/my_put_pixel.c	\
 		src/wf_interact.c	\
 		src/wf_game_parser.c	\
 		src/wf_nuke.c		\
-		src/wf_core.c
+		src/wf_core.c		\
+		src/wf_darkness.c
 
 OBJS	=	$(SRCS:.c=.o)
 

@@ -5,7 +5,7 @@
 ** Login   <arthur@epitech.net>
 **
 ** Started on  Mon Dec 19 14:17:18 2016 Arthur Philippe
-** Last update Sat Jan 14 08:48:09 2017 Arthur Philippe
+** Last update Sat Jan 14 15:51:21 2017 Arthur Philippe
 */
 
 #ifndef WOLF3D_H_
@@ -27,6 +27,8 @@
 
 # define FOV		360
 # define DEFAULT_SPAWN	((sfVector2f) {1.5, 1.5})
+# define NIGHT_COLOR	((sfColor) {0, 10, 23, 255})
+# define NIGHT_GROUND	((sfColor) {0, 11, 24, 150})
 # define KEY_PRSD(X)	sfKeyboard_isKeyPressed(X)
 
 /*
@@ -133,7 +135,7 @@ void				disp_map(t_env *);
 */
 void	wf_rendering_parser(t_my_window *, t_env *);
 int	is_posf_a_wall(sfVector2f, char **);
-void	wf_draw_col(int, t_my_window *, float, sfColor);
+void	wf_draw_col(int, t_my_window *, t_raycast *, int);
 float	wf_convert_in_height(float, t_my_window *, t_env *, float);
 void	wf_reset_pixels(t_my_framebuffer *);
 
