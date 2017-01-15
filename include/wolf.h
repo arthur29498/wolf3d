@@ -5,7 +5,7 @@
 ** Login   <arthur@epitech.net>
 **
 ** Started on  Mon Dec 19 14:17:18 2016 Arthur Philippe
-** Last update Sun Jan 15 19:42:27 2017 Arthur Philippe
+** Last update Sun Jan 15 20:30:12 2017 Arthur Philippe
 */
 
 #ifndef WOLF3D_H_
@@ -14,23 +14,19 @@
 # define EXIT_SUCCESS	0
 # define EXIT_FAIL	84
 # define EXIT_ARG_COUNT	84
-
 # define BUFFER_SIZE	10000
 # define SC_W		1024
 # define SC_H		768
 # define WINDOW_NAME	"WOLF3D, Get out of the maze!"
 # define MAP_NAME	"map.w3"
-
 # include <SFML/Graphics/RenderWindow.h>
 # include <SFML/Graphics/Sprite.h>
 # include <SFML/Graphics/Texture.h>
-
 # define FOV		60
 # define DEFAULT_SPAWN	((sfVector2f) {1.5, 1.5})
 # define NIGHT_COLOR	((sfColor) {0, 10, 23, 255})
 # define NIGHT_GROUND	((sfColor) {0, 11, 24, 150})
 # define KEY_PRSD(X)	sfKeyboard_isKeyPressed(X)
-
 /*
 ** custom structures
 */
@@ -69,7 +65,6 @@ typedef struct		s_raycast
   float			dist;
   sfColor		color;
 }			t_raycast;
-
 /*
 ** mandatory implemtation : put_pixel, draw_line, move_forward and raycast.
 */
@@ -91,7 +86,6 @@ sfVector2f	move_forward_rev(sfVector2f, float, float);
 float		degres_to_rads(float degres);
 t_raycast	raycast_ultimate(sfVector2f, float, char **);
 sfColor		wf_wall_color(sfVector2f, sfVector2f, char **);
-
 /*
 ** window related implements.
 */
@@ -103,7 +97,6 @@ void				wf_window_destroy(t_my_window *);
 void				wf_refresh_window(t_my_window *,
 						  t_env *,
 						  int *);
-
 /*
 ** data management
 */
@@ -117,19 +110,16 @@ void				display_file(char *);
 void				my_memset(char *, int);
 sfVector2f			wf_place_player(char **map);
 int				my_getnbr(char *);
-
 /*
 ** Error management
 */
 void				*wf_fd_errors(int, char *);
 void				*wf_usage_error(int e);
-
 /*
 ** Utilities
 */
 int				my_putstr(int, char *);
 void				disp_map(t_env *);
-
 /*
 ** Rendering
 */
@@ -139,14 +129,12 @@ void	wf_draw_col(int, t_my_window *, t_raycast *, int);
 float	wf_convert_in_height(float, t_my_window *, t_env *, float);
 void	wf_reset_pixels(t_my_framebuffer *);
 void	wf_darken(t_raycast *);
-
 /*
 ** Interaction
 */
 int	wf_interact(t_env *);
 int	wf_turn(t_env *);
 int	wolf_single_map(char *);
-
 /*
 ** Campaign
 */
