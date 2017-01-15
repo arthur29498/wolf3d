@@ -5,7 +5,7 @@
 ** Login   <arthur@epitech.net>
 **
 ** Started on  Mon Dec 19 13:35:43 2016 Arthur Philippe
-** Last update Wed Jan 11 11:13:07 2017 Arthur Philippe
+** Last update Sun Jan 15 19:51:45 2017 Arthur Philippe
 */
 
 #include "wolf.h"
@@ -28,6 +28,7 @@ int			wf_start_window(t_my_window *w, t_env *env)
   wf_rendering_parser(w, env);
   sfTexture_updateFromPixels(w->tex, w->buffer->pixels, SC_W, SC_H, 0, 0);
   my_putstr(STDOUT_FILENO, HINT_DONE);
+  my_putstr(STDOUT_FILENO, HINT_LAUNCHED_GAME);
   return (0);
 }
 
