@@ -5,7 +5,7 @@
 ** Login   <arthur@epitech.net>
 **
 ** Started on  Mon Dec 19 14:17:18 2016 Arthur Philippe
-** Last update Sat Jan 14 21:56:11 2017 Arthur Philippe
+** Last update Sun Jan 15 19:42:27 2017 Arthur Philippe
 */
 
 #ifndef WOLF3D_H_
@@ -25,7 +25,7 @@
 # include <SFML/Graphics/Sprite.h>
 # include <SFML/Graphics/Texture.h>
 
-# define FOV		360
+# define FOV		60
 # define DEFAULT_SPAWN	((sfVector2f) {1.5, 1.5})
 # define NIGHT_COLOR	((sfColor) {0, 10, 23, 255})
 # define NIGHT_GROUND	((sfColor) {0, 11, 24, 150})

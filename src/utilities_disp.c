@@ -5,7 +5,7 @@
 ** Login   <arthur@epitech.net>
 **
 ** Started on  Fri Dec 23 13:16:56 2016 Arthur Philippe
-** Last update Wed Jan 11 11:07:50 2017 Arthur Philippe
+** Last update Sun Jan 15 19:43:20 2017 Arthur Philippe
 */
 
 #include "wolf.h"
@@ -16,6 +16,8 @@ int	my_strlen(char *str)
 {
   int	i;
 
+  if (!str)
+    return (0);
   i = 0;
   while (str[i] && str[i] != -1)
     i += 1;
