@@ -5,7 +5,7 @@
 ** Login   <arthur@epitech.net>
 **
 ** Started on  Wed Dec 28 10:48:22 2016 Arthur Philippe
-** Last update Thu Jan 12 13:59:29 2017 Arthur Philippe
+** Last update Sun Jan 15 12:41:09 2017 Arthur Philippe
 */
 
 #include "wolf.h"
@@ -53,6 +53,7 @@ int		wolf_campaign_mode()
   out = 0;
   if (w && env && !wf_set_env(file, env) && !wf_start_window(w, env))
     {
+      free(file);
       my_putstr(STDOUT_FILENO, HINT_LAUNCHED_GAME);
       while (sfRenderWindow_isOpen(w->window) && env)
 	{
@@ -111,7 +112,7 @@ char		*wf_get_next_file_name()
   buffer = file_to_buffer(CAMPAIGN_CONF);
   if (!buffer)
     return ((char *) 0);
-  file_name = malloc(sizeof(char) * 64);
+  file_name = malloc(sizeof(char) * 80);
   if (!file_name)
     return (file_name);
   while (buffer[++i] && buffer[i] != '\n' && i2 < 64)
@@ -119,6 +120,7 @@ char		*wf_get_next_file_name()
       file_name[i2] = buffer[i];
       i2 += 1;
     }
+  free (buffer);
   file_name[i2] = 0;
   return (file_name);
 }

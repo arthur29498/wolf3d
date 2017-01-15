@@ -5,7 +5,7 @@
 ** Login   <arthur@epitech.net>
 **
 ** Started on  Wed Dec 28 14:27:39 2016 Arthur Philippe
-** Last update Thu Jan 12 13:30:33 2017 Arthur Philippe
+** Last update Sun Jan 15 12:37:40 2017 Arthur Philippe
 */
 
 #include "wolf.h"
@@ -30,12 +30,13 @@ void	my_env_destroy(t_env *env)
   if (!env)
     return ;
   my_putstr(STDOUT_FILENO, HINT_NUKE_ENV);
-  while (i < env->map_size - 1 && env->map[i])
+  while (i < env->map_size && env->map[i])
     {
       my_putstr(STDOUT_FILENO, ".");
       free(env->map[i]);
       i += 1;
     }
+  free(env->map[i]);
   my_putstr(STDOUT_FILENO, HINT_NUKE_CONTENT);
   free(env->map);
   my_putstr(STDOUT_FILENO, HINT_NUKE_PTR);

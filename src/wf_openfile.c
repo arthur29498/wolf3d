@@ -5,7 +5,7 @@
 ** Login   <arthur@epitech.net>
 **
 ** Started on  Mon Dec 19 14:01:10 2016 Arthur Philippe
-** Last update Fri Jan 13 15:01:19 2017 Arthur Philippe
+** Last update Sun Jan 15 12:45:34 2017 Arthur Philippe
 */
 
 #include "wolf.h"
