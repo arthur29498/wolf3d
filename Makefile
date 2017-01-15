@@ -5,7 +5,7 @@
 ## Login   <arthur@epitech.net>
 ##
 ## Started on  Tue Dec 20 10:21:11 2016 Arthur Philippe
-## Last update Sat Jan 14 09:10:24 2017 Arthur Philippe
+## Last update Sun Jan 15 22:25:10 2017 Arthur Philippe
 ##
 
 CC	=	gcc
@@ -33,7 +33,7 @@ SRCS	=	src/my_put_pixel.c	\
 
 OBJS	=	$(SRCS:.c=.o)
 
-CFLAGS	=	-W -Wall -Wextra
+CFLAGS	=	-W -Wall -Wextra -Werror
 
 ##CFLAGS	+=	-Werror
 
