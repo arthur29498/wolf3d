@@ -1,0 +1,39 @@
+Wolf3D:
+Synopsis
+	try to escape the maze:
+	the player must find the way out avoiding hinden
+	traps hoping to find the level's exit.
+
+Usage
+	./wold3d
+		launches the campaign
+	./wold3d <map>
+		launches the specified map then exits at level
+		completion.
+
+Map
+	To create a map, mind the followings ellements:
+		0: is walking surface
+		1: is a wall
+		p: is the player's start point
+		t: is for traps (for the silly map designers)
+		w: stands for winning, being the level's exit.
+	/!\ Characters are not separated by commas. That would be heartbreaking.
+
+Campaign
+	To create a campaign with a collection of maps, place the maps
+	in the campaign_maps directory and specifiy their path in the
+	campaign data file.
+
+Misc configuration
+	Text file such as this one can be found in the game_data
+	directory and can be modified at the user's liking.
+	Such files are:
+		-winning file
+		-game_over file
+		-next_stage file
+		-welcome file.
+	Also found in the game_data directory is the "conf" file that
+	houses FOV base setting and 1 for night mode, 0 for day mode
+	on the 2nd line.
+	~Thy mysterious helper
