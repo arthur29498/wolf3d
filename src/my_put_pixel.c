@@ -5,12 +5,13 @@
 ** Login   <arthur@epitech.net>
 **
 ** Started on  Mon Dec 19 13:32:39 2016 Arthur Philippe
-** Last update Sat Jan 14 21:52:15 2017 Arthur Philippe
+** Last update Sat Jun  3 14:15:51 2017 Arthur Philippe
 */
 
 #include "wolf.h"
 
-void	my_put_pixel(t_my_framebuffer *framebuffer, int x, int y, sfColor color)
+void	my_put_pixel(t_my_framebuffer *framebuffer, int x,
+		     int y, sfColor color)
 {
   if (x < 0 || y < 0)
     return ;
