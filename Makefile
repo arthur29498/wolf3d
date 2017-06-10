@@ -39,7 +39,7 @@ CFLAGS	=	-W -Wall -Wextra -Werror
 
 CFLAGS	+=	-I include/
 
-LDFLAGS	=	-lm -lc_graph_prog
+LDFLAGS	=	-lm -lcsfml-window -lcsfml-system -lcsfml-graphics
 
 all: $(NAME)
 
